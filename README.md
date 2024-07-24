@@ -1,66 +1,79 @@
-## Foundry
+# NFT Staking Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
 
-Foundry consists of:
+This project implements an NFT staking contract where users can stake their NFTs and earn reward tokens. The contract supports staking and unstaking NFTs, claiming rewards, and is upgradeable using the UUPS proxy pattern.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Requirements
 
-## Documentation
+- Node.js
+- Foundry
+- An Ethereum network (e.g., Mainnet, Rinkeby, etc.)
+- RPC URL and Private Key for deployment
 
-https://book.getfoundry.sh/
+## Installation
 
-## Usage
+1. Clone the repository:
 
-### Build
+    ```bash
+    git clone https://github.com/soloking1412/NFTStaking-Foundry.git
+    cd NFTStaking-Foundry
+    ```
 
-```shell
-$ forge build
-```
+2. Install Foundry and other dependencies:
 
-### Test
+    ```bash
+    forge install
+    ```
 
-```shell
-$ forge test
-```
+## Deployment
 
-### Format
+1. Update the deployment script `DeployNFTStaking.s.sol` with your RPC URL and Private Key.
 
-```shell
-$ forge fmt
-```
+2. Compile the contracts:
 
-### Gas Snapshots
+    ```bash
+    forge build
+    ```
 
-```shell
-$ forge snapshot
-```
+3. Run the deployment script:
 
-### Anvil
+    ```bash
+    forge script script/DeployNFTStaking.s.sol --rpc-url <your_rpc_url> --private-key <your_private_key> --broadcast
+    ```
 
-```shell
-$ anvil
-```
+    Replace `<your_rpc_url>` with the RPC URL of the network you're deploying to (e.g., Infura, Alchemy) and `<your_private_key>` with the private key of the deploying wallet.
 
-### Deploy
+## Testing
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+1. Run the tests:
 
-### Cast
+    ```bash
+    forge test
+    ```
 
-```shell
-$ cast <subcommand>
-```
+## Contracts
 
-### Help
+### NFTStaking
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+The main contract for staking NFTs and earning rewards. Users can stake their NFTs, claim rewards, and unstake their NFTs after an unbonding period.
+
+### ERC721Mock
+
+A mock ERC721 contract used for testing purposes. This contract allows minting of NFTs for testing.
+
+### ERC20Mock
+
+A mock ERC20 contract used for testing purposes. This contract allows minting of reward tokens for testing.
+
+## Project Structure
+
+- `src/`: Contains the Solidity source files.
+  - `NFTStaking.sol`: The main NFT staking contract.
+  - `ERC721Mock.sol`: Mock ERC721 contract for testing.
+  - `ERC20Mock.sol`: Mock ERC20 contract for testing.
+- `script/`: Contains the deployment script.
+  - `DeployNFTStaking.s.sol`: Script to deploy the NFTStaking contract and the mock contracts.
+- `test/`: Contains the test scripts.
+  - `NFTStakingTest.t.sol`: Test cases for the NFTStaking contract.
+
